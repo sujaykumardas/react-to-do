@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import TodoInput from './TodoInput'
-import TodoList from './TodoList'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux'
 import actions from '../actions/actions'
 import PieChart from 'react-minimal-pie-chart'
-import routes from '../routes/routes'
-import { BrowserRouter as Router,Link } from "react-router-dom";
+import Links from '../routes/links'
 
 class App extends Component {
   render() {
@@ -19,17 +17,18 @@ class App extends Component {
     })
     console.log(completedTodos.length,"completedTodos")
     console.log(this.props.todos.length - completedTodos.length,"notcompletedTodos")
-    return (
-      <div>
-        <h1 className="header">Todos</h1>
+    return (      
+      <div>          
+        <h1 className="header">HomePage</h1>
+        {Links()}
         {this.props.todos.length>0 && <PieChart style={divStyle} showChart={false}
           data={[
             { title: 'Completed', value: completedTodos.length, color: 'green' },
             { title: 'NotCompleted', value: this.props.todos.length - completedTodos.length, color: 'red' },
           ]}
         />}
-        <TodoInput addTodo={this.props.actions.addTodo}/>
-        <TodoList actions={this.props.actions} todos={this.props.todos}/>
+        {/* <TodoInput addTodo={this.props.actions.addTodo}/>
+        <TodoList actions={this.props.actions} todos={this.props.todos}/> */}
       </div>
     )
   }
@@ -44,4 +43,4 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch)
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

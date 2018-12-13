@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import React from 'react'
 
 const Links = () => {
-  return 
+  return (
   <div>
     <ul>
+      <li>
+        <Link to="/">Home Page</Link>
+      </li>
       <li>
         <Link to="/todo">Add Todo</Link>
       </li>
@@ -13,5 +16,6 @@ const Links = () => {
       </li>
     </ul>  
   </div>
+  )  
 }
 export default Links

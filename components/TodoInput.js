@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actions from '../actions/actions'
+import { withRouter } from 'react-router'
+
 class TodoInput extends Component {
   constructor(props) {
+    console.log(props,"props")
     super(props)
     this.state = {
       title: ''
@@ -16,7 +22,7 @@ class TodoInput extends Component {
     event.preventDefault()
     if (this.state.title != '')
     {
-      this.props.addTodo(this.state.title)
+      this.props.actions.addTodo(this.state.title)
       //reset input box
       this.setState({
         title: ''
@@ -24,6 +30,7 @@ class TodoInput extends Component {
     }
   }
   render() {
+    console.log("TodoInput")
     return (
     <div className="todo__input">
       <div className="title">
@@ -42,4 +49,15 @@ class TodoInput extends Component {
     )
   }
 }
-export default TodoInput
+
+function mapStateToProps(state) {
+  console.log(state,"state")
+  return state
+}
+function mapDispatchToProps(dispatch) {
+  console.log(dispatch,"dispatch")
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoInput))

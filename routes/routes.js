@@ -1,14 +1,16 @@
-import { Route } from "react-router-dom";
+import { Route } from "react-router-dom"
 import React from 'react'
-import TodoInput from "../components/TodoInput";
-import TodoList from "../components/TodoList";
-import App from "../components/App";
+import TodoInput from "../components/TodoInput"
+import TodoList from "../components/TodoList"
+import App from "../components/App"
+import { Switch } from 'react-router'
 
 const routes = (
-  <Route path="/" component={App}>
-    <Route path="todo" component={TodoInput} />
-    <Route path="todos" component={TodoList} />     
-  </Route>
+  <Switch>
+    <Route exact path="/" component={App} />
+    <Route exact path="/todo" component={TodoInput} />
+    <Route exact path="/todos" component={TodoList} />
+  </Switch>
 )
 
 export default routes
